@@ -44,20 +44,10 @@ export function WebVitalsReporter() {
           })
           fidObserver.observe({ type: "first-input", buffered: true })
 
-          // Monitor INP (Interaction to Next Paint)
-          const inpObserver = new PerformanceObserver((entryList) => {
-            const entries = entryList.getEntries()
-            for (const entry of entries) {
-              console.log("INP candidate:", (entry as any).duration)
-            }
-          })
-          inpObserver.observe({ type: "first-input", buffered: true })
-
           return () => {
             lcpObserver.disconnect()
             clsObserver.disconnect()
             fidObserver.disconnect()
-            inpObserver.disconnect()
           }
         } catch (e) {
           console.error("Performance observer error:", e)
