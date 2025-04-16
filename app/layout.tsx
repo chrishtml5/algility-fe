@@ -10,10 +10,7 @@ import { OrganizationStructuredData, ServiceStructuredData, FAQStructuredData } 
 import { inter, roboto } from "@/utils/font-optimization"
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#EFF1E8" },
-    { media: "(prefers-color-scheme: dark)", color: "#144132" },
-  ],
+  themeColor: "#144132", // Single theme color for consistency
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
@@ -131,14 +128,24 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+        <meta name="theme-color" content="#144132" />
         <style>{`
           #nprogress, .nprogress-custom-parent {
             display: none !important;
           }
+          :root {
+            color-scheme: light;
+            background-color: #144132;
+          }
         `}</style>
       </head>
-      <body className={cn("min-h-screen bg-background font-sans antialiased")}>
-        <ThemeProvider>
+      <body className={cn("min-h-screen bg-[#144132] font-sans antialiased")}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
+          enableSystem={false}
+          disableTransitionOnChange
+        >
           {children}
           <Analytics />
         </ThemeProvider>
