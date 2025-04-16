@@ -51,7 +51,8 @@ export function WebVitalsReporter() {
               console.log("INP candidate:", (entry as any).duration)
             }
           })
-          inpObserver.observe({ type: "event", buffered: true, durationThreshold: 16 })
+          // Remove durationThreshold as it's not part of the standard PerformanceObserverInit type
+          inpObserver.observe({ type: "event", buffered: true })
 
           return () => {
             lcpObserver.disconnect()
