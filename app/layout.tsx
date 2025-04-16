@@ -1,6 +1,7 @@
 import type React from "react"
 import "@/app/globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
+import { Analytics } from '@vercel/analytics/react'
 import { cn } from "@/lib/utils"
 import { IOSFixes } from "@/components/ios-fixes"
 import { PerformanceOptimizations } from "@/components/performance-optimizations"
@@ -127,16 +128,23 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <head>
-        <style>{`
-          #nprogress {
-            display: none !important;
-          }
-        `}</style>
-      </head>
-      <body>
-        {children}
+    <html lang="en" suppressHydrationWarning>
+      <body className={cn(
+        "min-h-screen bg-background font-sans antialiased",
+        inter.variable,
+        roboto.variable
+      )}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+          <Analytics />
+        </ThemeProvider>
+        <IOSFixes />
+        <PerformanceOptimizations />
       </body>
     </html>
   )
