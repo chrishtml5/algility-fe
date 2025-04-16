@@ -51,7 +51,7 @@ export function WebVitalsReporter() {
               console.log("INP candidate:", (entry as any).duration)
             }
           })
-          inpObserver.observe({ type: "interaction", buffered: true })
+          inpObserver.observe({ type: "first-input", buffered: true })
 
           return () => {
             lcpObserver.disconnect()
