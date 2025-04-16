@@ -26,11 +26,23 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+        <meta name="apple-mobile-web-app-title" content="Algility" />
         <meta name="theme-color" content="#144132" />
         <style>{`
           :root, body, html {
             background: #144132 !important;
+            -webkit-tap-highlight-color: transparent;
+          }
+          body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: env(safe-area-inset-top);
+            background: #144132;
+            z-index: 9999;
           }
         `}</style>
       </head>
