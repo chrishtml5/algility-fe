@@ -5,15 +5,14 @@ import { Analytics } from '@vercel/analytics/react'
 import { cn } from "@/lib/utils"
 import { IOSFixes } from "@/components/ios-fixes"
 import { PerformanceOptimizations } from "@/components/performance-optimizations"
-import type { Metadata, Viewport } from "next"
-import { OrganizationStructuredData, ServiceStructuredData, FAQStructuredData } from "./structured-data"
+import type { Viewport } from "next"
 import { inter, roboto } from "@/utils/font-optimization"
 
 export const viewport: Viewport = {
   themeColor: "#144132",
   width: "device-width",
   initialScale: 1,
-  maximumScale: 5,
+  maximumScale: 2.5,
   userScalable: true,
   viewportFit: "cover",
 }
@@ -26,30 +25,56 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <meta name="apple-mobile-web-app-capable" content="no" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="theme-color" content="#144132" />
         <style>{`
           :root {
             background: #144132 !important;
             color-scheme: only light;
-            -webkit-overflow-scrolling: touch;
+            --vh: 1vh;
           }
-          html {
+          html, body {
             background: #144132 !important;
             height: 100%;
+            min-height: -webkit-fill-available;
             overflow-y: auto;
             -webkit-overflow-scrolling: touch;
+            overscroll-behavior-y: none;
+            position: relative;
+            touch-action: pan-y;
           }
-          body {
-            background: #144132 !important;
-            min-height: 100%;
-            overflow-y: auto;
-            -webkit-overflow-scrolling: touch;
+          * {
+            -webkit-tap-highlight-color: transparent;
+            scroll-behavior: smooth;
+            box-sizing: border-box;
+          }
+          input, textarea, select, button {
+            font-size: 16px !important;
+            padding: 12px !important;
+            touch-action: manipulation;
+            -webkit-appearance: none;
+          }
+          button {
+            cursor: pointer;
+            min-height: 44px;
+            min-width: 44px;
+          }
+          .min-h-screen {
+            min-height: calc(var(--vh, 1vh) * 100);
+          }
+          @supports (-webkit-touch-callout: none) {
+            body {
+              padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+            }
           }
         `}</style>
       </head>
-      <body className={cn("min-h-screen font-sans antialiased bg-[#144132]", inter.variable, roboto.variable)}>
+      <body 
+        className={cn(
+          "min-h-screen font-sans antialiased bg-[#144132] overflow-x-hidden",
+          inter.variable,
+          roboto.variable
+        )}
+      >
         <ThemeProvider
           attribute="class"
           defaultTheme="light"
@@ -58,10 +83,11 @@ export default function RootLayout({
         >
           {children}
           <Analytics />
+          <IOSFixes />
+          <PerformanceOptimizations />
         </ThemeProvider>
       </body>
     </html>
   )
 }
 
-import './globals.css'
