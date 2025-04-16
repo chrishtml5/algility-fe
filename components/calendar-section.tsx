@@ -67,14 +67,13 @@ export default function CalendarSection() {
 
   return (
     <section id="calendar-section" className="p-0 bg-theme w-full" ref={calendarRef} aria-labelledby="calendar-heading">
-      {/* Hidden heading for SEO and accessibility */}
       <h2 id="calendar-heading" className="sr-only">
         Schedule a Demo with Algility
       </h2>
 
-      {/* Divider with Algility icon - with balanced padding */}
-      <div className="py-8 sm:py-10 md:py-12">
-        <div className="relative w-full h-[2px] bg-[#144132]/10 mx-auto max-w-[90%] sm:max-w-[85%] md:max-w-[80%]">
+      {/* Improved spacing for divider */}
+      <div className="py-12 sm:py-14 md:py-16">
+        <div className="relative w-full h-[2px] bg-[#144132]/10 mx-auto max-w-[95%] sm:max-w-[90%] md:max-w-[85%]">
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-theme p-3 sm:p-4 rounded-full">
             <div className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 relative flex items-center justify-center">
               <svg
@@ -92,14 +91,14 @@ export default function CalendarSection() {
         </div>
       </div>
 
-      <div className="w-full max-w-full">
+      <div className="w-full max-w-full px-4 sm:px-6 md:px-8">
         <div
-          className={`${isMobile ? "h-[500px]" : "h-[600px] md:h-[650px] lg:h-[700px]"} overflow-hidden`}
+          className={`${
+            isMobile ? "h-[600px]" : "h-[600px] md:h-[650px] lg:h-[700px]"
+          } overflow-hidden rounded-lg shadow-sm`}
           style={{
-            // Add iOS Safari specific styles
             WebkitOverflowScrolling: "touch",
-            // Fix height calculation on iOS
-            height: isIOSDevice ? (isMobile ? "500px" : "calc(var(--vh, 1vh) * 65)") : undefined,
+            height: isIOSDevice ? (isMobile ? "600px" : "calc(var(--vh, 1vh) * 70)") : undefined,
           }}
         >
           <Cal
@@ -109,9 +108,9 @@ export default function CalendarSection() {
               width: "100%",
               height: "100%",
               overflow: "scroll",
-              // Fix for iOS Safari rendering issues
               transform: isIOSDevice ? "translateZ(0)" : undefined,
               WebkitTransform: isIOSDevice ? "translateZ(0)" : undefined,
+              padding: isMobile ? "1rem" : undefined,
             }}
             config={{
               layout: isMobile ? "month_view" : "month_view",
@@ -121,48 +120,26 @@ export default function CalendarSection() {
         </div>
       </div>
 
-      {/* Mobile-specific styles */}
+      {/* Updated mobile styles */}
       <style jsx global>{`
         @media (max-width: 767px) {
-          /* Ensure buttons and interactive elements are large enough for touch */
-          .cal-embed button, 
-          .cal-embed a, 
-          .cal-embed [role="button"] {
-            min-height: 44px !important;
-            min-width: 44px !important;
-          }
-          
-          /* Prevent horizontal overflow */
           .cal-embed {
+            padding: 1rem !important;
             max-width: 100vw !important;
             overflow-x: hidden !important;
           }
           
-          /* Increase font size for better readability */
-          .cal-embed {
-            font-size: 16px !important;
-          }
-        }
-        
-        /* iOS Safari specific fixes */
-        @supports (-webkit-touch-callout: none) {
-          /* Fix for iOS Safari scrolling */
-          .cal-embed {
-            -webkit-overflow-scrolling: touch !important;
-          }
-          
-          /* Fix for iOS Safari tap highlight */
           .cal-embed button, 
           .cal-embed a, 
           .cal-embed [role="button"] {
-            -webkit-tap-highlight-color: transparent !important;
+            min-height: 48px !important;
+            min-width: 48px !important;
+            margin: 4px !important;
           }
           
-          /* Fix for iOS Safari input zoom */
-          .cal-embed input, 
-          .cal-embed select, 
-          .cal-embed textarea {
+          .cal-embed * {
             font-size: 16px !important;
+            line-height: 1.5 !important;
           }
         }
       `}</style>
