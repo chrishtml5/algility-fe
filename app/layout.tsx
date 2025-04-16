@@ -14,7 +14,6 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 1,
-  viewportFit: "cover",
 }
 
 export default function RootLayout({
@@ -25,37 +24,35 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-        <meta name="apple-mobile-web-app-title" content="Algility" />
+        <meta name="apple-mobile-web-app-capable" content="standalone" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="theme-color" content="#144132" />
         <style>{`
-          :root, body, html {
+          :root {
             background: #144132 !important;
-            -webkit-tap-highlight-color: transparent;
+            color-scheme: only light;
           }
-          body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: env(safe-area-inset-top);
-            background: #144132;
-            z-index: 9999;
+          html {
+            background: #144132 !important;
+            height: 100%;
+            padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+          }
+          body {
+            background: #144132 !important;
+            min-height: 100%;
+          }
+          @supports (-webkit-touch-callout: none) {
+            .min-h-screen {
+              min-height: -webkit-fill-available;
+            }
           }
         `}</style>
       </head>
-      <body className={cn(
-        "min-h-screen font-sans antialiased bg-[#144132]",
-        inter.variable,
-        roboto.variable
-      )}>
+      <body className={cn("min-h-screen font-sans antialiased bg-[#144132]", inter.variable, roboto.variable)}>
         <ThemeProvider
           attribute="class"
           defaultTheme="light"
           enableSystem={false}
-          disableTransitionOnChange
           forcedTheme="light"
         >
           {children}
