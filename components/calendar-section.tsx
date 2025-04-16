@@ -66,7 +66,7 @@ export default function CalendarSection() {
   }, [])
 
   return (
-    <section id="calendar-section" className="p-0 bg-theme w-full" ref={calendarRef} aria-labelledby="calendar-heading">
+    <section id="calendar-section" className="p-4 sm:p-6 md:p-8 bg-theme w-full" ref={calendarRef} aria-labelledby="calendar-heading">
       <h2 id="calendar-heading" className="sr-only">
         Schedule a Demo with Algility
       </h2>
@@ -91,14 +91,14 @@ export default function CalendarSection() {
         </div>
       </div>
 
-      <div className="w-full max-w-full px-4 sm:px-6 md:px-8">
+      <div className="w-full max-w-full">
         <div
           className={`${
-            isMobile ? "h-[600px]" : "h-[600px] md:h-[650px] lg:h-[700px]"
-          } overflow-hidden rounded-lg shadow-sm`}
+            isMobile ? "h-[750px]" : "h-[600px] md:h-[650px] lg:h-[700px]"
+          } overflow-hidden rounded-xl shadow-lg`}
           style={{
             WebkitOverflowScrolling: "touch",
-            height: isIOSDevice ? (isMobile ? "600px" : "calc(var(--vh, 1vh) * 70)") : undefined,
+            height: isIOSDevice ? (isMobile ? "750px" : "calc(var(--vh, 1vh) * 70)") : undefined,
           }}
         >
           <Cal
@@ -110,21 +110,20 @@ export default function CalendarSection() {
               overflow: "scroll",
               transform: isIOSDevice ? "translateZ(0)" : undefined,
               WebkitTransform: isIOSDevice ? "translateZ(0)" : undefined,
-              padding: isMobile ? "1rem" : undefined,
+              padding: isMobile ? "1.5rem" : undefined,
             }}
             config={{
-              layout: isMobile ? "month_view" : "month_view",
+              layout: "month_view",
               theme: "light",
             }}
           />
         </div>
       </div>
 
-      {/* Updated mobile styles */}
       <style jsx global>{`
         @media (max-width: 767px) {
           .cal-embed {
-            padding: 1rem !important;
+            padding: 1.5rem !important;
             max-width: 100vw !important;
             overflow-x: hidden !important;
           }
@@ -132,14 +131,15 @@ export default function CalendarSection() {
           .cal-embed button, 
           .cal-embed a, 
           .cal-embed [role="button"] {
-            min-height: 48px !important;
-            min-width: 48px !important;
-            margin: 4px !important;
+            min-height: 44px !important;
+            min-width: 44px !important;
+            margin: 6px !important;
+            padding: 8px !important;
           }
           
           .cal-embed * {
             font-size: 16px !important;
-            line-height: 1.5 !important;
+            line-height: 1.6 !important;
           }
         }
       `}</style>
