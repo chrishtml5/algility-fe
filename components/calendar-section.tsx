@@ -34,7 +34,7 @@ export default function CalendarSection() {
           dark: { "cal-brand": "#BEE847" },
         },
         hideEventTypeDetails: false,
-        layout: isMobile ? "mobile_month_view" : "month_view",
+        layout: isMobile ? "month_view" : "month_view" as const,
       })
     })()
   }, [isMobile])
@@ -114,7 +114,7 @@ export default function CalendarSection() {
               WebkitTransform: isIOSDevice ? "translateZ(0)" : undefined,
             }}
             config={{
-              layout: isMobile ? "mobile_month_view" : "month_view",
+              layout: isMobile ? "month_view" : "month_view",
               theme: "light",
             }}
           />
