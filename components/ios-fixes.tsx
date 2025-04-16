@@ -23,11 +23,31 @@ export function IOSFixes() {
       setTimeout(setIOSVh, 100)
     })
 
-    // Fix for iOS Safari scroll momentum
-    document.body.style.webkitOverflowScrolling = "touch"
-
-    // Fix for iOS Safari elastic bounce effect
-    document.body.style.overscrollBehaviorY = "none"
+    useEffect(() => {
+      if (typeof document !== 'undefined') {
+        // Fix for iOS Safari scroll momentum
+        (document.body.style as any)['-webkit-overflow-scrolling'] = 'touch'
+    
+        // Fix for iOS Safari elastic bounce effect
+        document.body.style.overscrollBehaviorY = "none"
+    
+        // Prevent pull-to-refresh
+        document.body.style.overflow = 'hidden'
+        document.body.style.position = 'fixed'
+        document.body.style.width = '100%'
+        document.body.style.height = '100%'
+    
+        return () => {
+          // Cleanup styles when component unmounts
+          (document.body.style as any)['-webkit-overflow-scrolling'] = ''
+          document.body.style.overscrollBehaviorY = ''
+          document.body.style.overflow = ''
+          document.body.style.position = ''
+          document.body.style.width = ''
+          document.body.style.height = ''
+        }
+      }
+    }, [])
 
     // Fix for iOS Safari double-tap zoom
     const meta = document.createElement("meta")
