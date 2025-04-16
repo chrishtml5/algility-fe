@@ -13,8 +13,7 @@ export const viewport: Viewport = {
   themeColor: "#144132",
   width: "device-width",
   initialScale: 1,
-  maximumScale: 5,
-  userScalable: false,
+  maximumScale: 1,
   viewportFit: "cover",
 }
 
@@ -26,20 +25,12 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="theme-color" content="#144132" />
         <style>{`
-          :root {
-            background-color: #144132;
-            --sat: env(safe-area-inset-top);
-          }
-          body {
-            background-color: #144132 !important;
-            padding-top: var(--sat);
-          }
-          #nprogress, .nprogress-custom-parent {
-            display: none !important;
+          :root, body, html {
+            background: #144132 !important;
           }
         `}</style>
       </head>
@@ -53,6 +44,7 @@ export default function RootLayout({
           defaultTheme="light"
           enableSystem={false}
           disableTransitionOnChange
+          forcedTheme="light"
         >
           {children}
           <Analytics />
