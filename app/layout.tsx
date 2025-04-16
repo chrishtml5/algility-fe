@@ -129,22 +129,19 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={cn(
-        "min-h-screen bg-background font-sans antialiased",
-        inter.variable,
-        roboto.variable
-      )}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+        <style>{`
+          #nprogress, .nprogress-custom-parent {
+            display: none !important;
+          }
+        `}</style>
+      </head>
+      <body className={cn("min-h-screen bg-background font-sans antialiased")}>
+        <ThemeProvider>
           {children}
           <Analytics />
         </ThemeProvider>
-        <IOSFixes />
-        <PerformanceOptimizations />
       </body>
     </html>
   )
