@@ -123,57 +123,23 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode
-}>) {
+}) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${inter.variable} ${roboto.variable}`}>
+    <html lang="en">
       <head>
-        {/* Preload critical assets */}
-        <link rel="preload" href="/android-chrome-512x512.png" as="image" type="image/png" />
-
-        {/* Preconnect to external domains */}
-        <link rel="preconnect" href="https://cal.com" />
-        <link rel="preconnect" href="https://res.cloudinary.com" />
-
-        {/* Standard favicon */}
-        <link rel="icon" href="/algility.ico" sizes="any" />
-        <link rel="shortcut icon" href="/algility.ico" />
-
-        {/* Apple Touch Icons */}
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-        <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png" />
-        <link rel="apple-touch-icon" sizes="167x167" href="/apple-touch-icon-167x167.png" />
-        <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png" />
-
-        {/* Web App Manifest */}
-        <link rel="manifest" href="/manifest.json" />
-
-        {/* iOS specific meta tags */}
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-        <meta name="apple-mobile-web-app-title" content="Algility" />
-
-        {/* Android specific meta tags */}
-        <meta name="mobile-web-app-capable" content="yes" />
-        <meta name="application-name" content="Algility" />
-
-        {/* Canonical URL */}
-        <link rel="canonical" href="https://algility.com" />
+        <style>{`
+          #nprogress {
+            display: none !important;
+          }
+        `}</style>
       </head>
-      <body className={cn("min-h-screen bg-theme antialiased")}>
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
-          <IOSFixes />
-          <PerformanceOptimizations />
-          <OrganizationStructuredData />
-          <ServiceStructuredData />
-          <FAQStructuredData />
-          {children}
-        </ThemeProvider>
+      <body>
+        {children}
       </body>
     </html>
   )
 }
-
 
 import './globals.css'
