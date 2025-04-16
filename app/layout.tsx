@@ -130,16 +130,22 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
         <meta name="theme-color" content="#144132" />
         <style>{`
+          :root {
+            background-color: #144132;
+          }
+          body {
+            background-color: #144132 !important;
+          }
           #nprogress, .nprogress-custom-parent {
             display: none !important;
           }
-          :root {
-            color-scheme: light;
-            background-color: #144132;
-          }
         `}</style>
       </head>
-      <body className={cn("min-h-screen bg-[#144132] font-sans antialiased")}>
+      <body className={cn(
+        "min-h-screen font-sans antialiased bg-[#144132]",
+        inter.variable,
+        roboto.variable
+      )}>
         <ThemeProvider
           attribute="class"
           defaultTheme="light"
