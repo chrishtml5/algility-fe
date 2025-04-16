@@ -22,19 +22,13 @@ export function IOSFixes() {
       (document.body.style as any)['-webkit-overflow-scrolling'] = 'touch'
   
       // Fix for iOS Safari elastic bounce effect
-      document.body.style.overscrollBehaviorY = "none"
-  
-      // Prevent pull-to-refresh
-      document.body.style.overflow = 'hidden'
-      document.body.style.position = 'fixed'
-      document.body.style.width = '100%'
-      document.body.style.height = '100%'
+      document.body.style.overscrollBehaviorY = "contain"
     }
 
     // Fix for iOS Safari double-tap zoom
     const meta = document.createElement("meta")
     meta.name = "viewport"
-    meta.content = "width=device-width, initial-scale=1, maximum-scale=1"
+    meta.content = "width=device-width, initial-scale=1, maximum-scale=5"
     document.head.appendChild(meta)
 
     // Event listeners
@@ -53,10 +47,6 @@ export function IOSFixes() {
       if (typeof document !== 'undefined') {
         (document.body.style as any)['-webkit-overflow-scrolling'] = ''
         document.body.style.overscrollBehaviorY = ''
-        document.body.style.overflow = ''
-        document.body.style.position = ''
-        document.body.style.width = ''
-        document.body.style.height = ''
       }
     }
   }, [])
