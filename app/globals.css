@@ -1,0 +1,212 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Add custom class for menu items */
+.menu-item {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.menu-item::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background-color: #144132;
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+.menu-item:hover::after {
+  width: 70%;
+}
+
+/* Content-visibility for off-screen content */
+.cv-auto {
+  content-visibility: auto;
+}
+
+@layer base {
+  :root {
+    --background: 84 25% 95%; /* This is #EFF1E8 */
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 84 25% 95%; /* This is #EFF1E8 */
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+
+    --radius: 0.5rem;
+
+    /* Default value for vh CSS variable (will be updated by JS for iOS) */
+    --vh: 1vh;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 84 25% 25%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-theme text-foreground;
+    /* Enable momentum scrolling for iOS */
+    -webkit-overflow-scrolling: touch;
+    /* Prevent elastic bounce effect on iOS */
+    overscroll-behavior-y: none;
+  }
+
+  /* Fix for iOS Safari 100vh issue */
+  .h-screen {
+    height: 100vh; /* Fallback */
+    height: calc(var(--vh, 1vh) * 100);
+  }
+
+  .min-h-screen {
+    min-height: 100vh; /* Fallback */
+    min-height: calc(var(--vh, 1vh) * 100);
+  }
+
+  /* Improve touch targets on iOS */
+  @supports (-webkit-touch-callout: none) {
+    button,
+    [role="button"],
+    input[type="submit"],
+    input[type="button"],
+    input[type="reset"],
+    a {
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* Fix for iOS Safari input zoom */
+    input,
+    select,
+    textarea {
+      font-size: 16px !important;
+    }
+
+    /* Fix for iOS Safari fixed position during scroll */
+    .fixed {
+      transform: translateZ(0);
+      -webkit-transform: translateZ(0);
+    }
+  }
+
+  /* Optimize animations for reduced motion preference */
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* Optimize for save-data preference */
+  .save-data img:not([loading="eager"]) {
+    content-visibility: auto;
+  }
+
+  /* Prevent layout shifts by setting explicit dimensions */
+  img,
+  video,
+  iframe {
+    max-width: 100%;
+    height: auto;
+    aspect-ratio: attr(width) / attr(height);
+  }
+
+  /* Optimize for print */
+  @media print {
+    .no-print {
+      display: none !important;
+    }
+  }
+}
+
+.bg-linear-to-r {
+  background: linear-gradient(to right, var(--tw-gradient-stops));
+}
+
+.bg-linear-to-l {
+  background: linear-gradient(to left, var(--tw-gradient-stops));
+}
+
+/* Add container queries for more responsive components */
+@supports (container-type: inline-size) {
+  .cq-container {
+    container-type: inline-size;
+  }
+
+  @container (max-width: 768px) {
+    .cq-md\:text-sm {
+      font-size: 0.875rem;
+    }
+  }
+}
+
+/* Add CSS containment for better performance */
+.contain-layout {
+  contain: layout;
+}
+
+.contain-paint {
+  contain: paint;
+}
+
+.contain-strict {
+  contain: strict;
+}
