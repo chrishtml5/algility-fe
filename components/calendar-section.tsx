@@ -94,11 +94,13 @@ export default function CalendarSection() {
       <div className="w-full max-w-full">
         <div
           className={`${
-            isMobile ? "h-[750px]" : "h-[600px] md:h-[650px] lg:h-[700px]"
+            isMobile ? "h-[800px]" : "h-[600px] md:h-[650px] lg:h-[700px]"
           } overflow-hidden rounded-xl shadow-lg`}
           style={{
             WebkitOverflowScrolling: "touch",
-            height: isIOSDevice ? (isMobile ? "750px" : "calc(var(--vh, 1vh) * 70)") : undefined,
+            height: isIOSDevice ? (isMobile ? "800px" : "calc(var(--vh, 1vh) * 70)") : undefined,
+// Remove duplicate WebkitOverflowScrolling property
+            overscrollBehavior: "none",
           }}
         >
           <Cal
@@ -107,10 +109,11 @@ export default function CalendarSection() {
             style={{
               width: "100%",
               height: "100%",
-              overflow: "scroll",
+              overflow: "auto",
               transform: isIOSDevice ? "translateZ(0)" : undefined,
               WebkitTransform: isIOSDevice ? "translateZ(0)" : undefined,
-              padding: isMobile ? "1.5rem" : undefined,
+              padding: isMobile ? "1.25rem" : undefined,
+              WebkitOverflowScrolling: "touch",
             }}
             config={{
               layout: "month_view",
@@ -123,9 +126,10 @@ export default function CalendarSection() {
       <style jsx global>{`
         @media (max-width: 767px) {
           .cal-embed {
-            padding: 1.5rem !important;
+            padding: 1.25rem !important;
             max-width: 100vw !important;
             overflow-x: hidden !important;
+            -webkit-overflow-scrolling: touch !important;
           }
           
           .cal-embed button, 
@@ -133,13 +137,20 @@ export default function CalendarSection() {
           .cal-embed [role="button"] {
             min-height: 44px !important;
             min-width: 44px !important;
-            margin: 6px !important;
-            padding: 8px !important;
+            margin: 4px !important;
+            padding: 6px !important;
+            touch-action: manipulation !important;
           }
           
           .cal-embed * {
-            font-size: 16px !important;
-            line-height: 1.6 !important;
+            font-size: 15px !important;
+            line-height: 1.5 !important;
+            user-select: none !important;
+          }
+
+          .cal-embed [role="grid"] {
+            touch-action: pan-y !important;
+            -webkit-overflow-scrolling: touch !important;
           }
         }
       `}</style>
