@@ -13,7 +13,9 @@ export const viewport: Viewport = {
   themeColor: "#144132",
   width: "device-width",
   initialScale: 1,
-  maximumScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+  viewportFit: "cover",
 }
 
 export default function RootLayout({
@@ -24,27 +26,26 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <meta name="apple-mobile-web-app-capable" content="standalone" />
+        <meta name="apple-mobile-web-app-capable" content="no" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="theme-color" content="#144132" />
         <style>{`
           :root {
             background: #144132 !important;
             color-scheme: only light;
+            -webkit-overflow-scrolling: touch;
           }
           html {
             background: #144132 !important;
             height: 100%;
-            padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
           }
           body {
             background: #144132 !important;
             min-height: 100%;
-          }
-          @supports (-webkit-touch-callout: none) {
-            .min-h-screen {
-              min-height: -webkit-fill-available;
-            }
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
           }
         `}</style>
       </head>
