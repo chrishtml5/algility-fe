@@ -1,6 +1,7 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* Import Tailwind base styles */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 
 /* Add custom class for menu items */
 .menu-item {
@@ -98,10 +99,11 @@
 
 @layer base {
   * {
-    @apply border-border;
+    border: var(--border);
   }
   body {
-    @apply bg-theme text-foreground;
+    background-color: var(--background);
+    color: var(--foreground);
     /* Enable momentum scrolling for iOS */
     -webkit-overflow-scrolling: touch;
     /* Prevent elastic bounce effect on iOS */
@@ -209,4 +211,52 @@
 
 .contain-strict {
   contain: strict;
+}
+
+/* Add these mobile-specific styles */
+@media (max-width: 768px) {
+  /* Adjust loading dots */
+  .cal-loading-dots {
+    transform: scale(0.5);
+    opacity: 0.8;
+  }
+  
+  /* Fix hero section text and spacing */
+  .hero-title {
+    font-size: 2rem;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    padding: 0 1rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1rem;
+    line-height: 1.4;
+    padding: 0 1.25rem;
+    margin-top: 0.75rem;
+  }
+  
+  /* Improve button styling */
+  .get-in-touch {
+    padding: 0.75rem 1.25rem;
+    font-size: 0.9375rem;
+    min-height: 44px;
+    touch-action: manipulation;
+    border-radius: 8px;
+    margin-top: 1rem;
+  }
+
+  /* Fix mobile spacing and alignment */
+  .mobile-container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    width: 100%;
+  }
+
+  /* Improve text readability */
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
 }
